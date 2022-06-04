@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { TodoList, InputField } from './components/';
 import './App.css';
 
 export const App = () => {
@@ -34,31 +35,8 @@ export const App = () => {
 
 	return (
 		<div className='App'>
-			<label>
-				<input
-					type='text'
-					value={text}
-					onChange={(e) => setText(e.target.value)}
-				/>
-				<button onClick={addTodo}>add todo</button>
-			</label>
-			<ul>
-				{todos.map((todo) => (
-					<li key={todo.id}>
-						<input
-							type='checkbox'
-							checked={todo.completed}
-							onChange={() => isDone(todo.id)}
-						/>
-						<span className={todo.completed ? 'done' : 'text'}>
-							{todo.text}
-						</span>
-						<span onClick={() => removeTodo(todo.id)} className='delete'>
-							&times;
-						</span>
-					</li>
-				))}
-			</ul>
+			<InputField text={text} setText={setText} addTodo={addTodo} />
+			<TodoList todos={todos} removeTodo={removeTodo} isDone={isDone} />
 		</div>
 	);
 };
